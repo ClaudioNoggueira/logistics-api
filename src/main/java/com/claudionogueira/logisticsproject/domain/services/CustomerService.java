@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Customer;
 import com.claudionogueira.logisticsproject.domain.repositories.CustomerRepo;
 import com.claudionogueira.logisticsproject.domain.services.interfaces.ICustomerService;
@@ -24,7 +25,8 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public Customer findById(Long id) {
-		return repo.findById(id).map(entity -> entity).orElse(null);
+		return repo.findById(id).map(entity -> entity)
+				.orElseThrow(() -> new ObjectNotFoundException("Customer with ID: '" + id + "' not found."));
 	}
 
 	@Override

@@ -32,8 +32,7 @@ public class CustomerController {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Customer> findById(@PathVariable Long id) {
-		Customer obj = service.findById(id);
-		return (obj == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(obj);
+		return ResponseEntity.ok(service.findById(id));
 	}
 
 	@PostMapping(value = "/add")
