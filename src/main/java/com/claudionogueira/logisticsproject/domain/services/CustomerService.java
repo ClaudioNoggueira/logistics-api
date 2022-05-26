@@ -33,4 +33,13 @@ public class CustomerService implements ICustomerService {
 	public void add(Customer entity) {
 		repo.save(entity);
 	}
+
+	@Override
+	public void update(Long id, Customer entity) {
+		Customer objToBeUpdated = this.findById(id);
+		objToBeUpdated.setName(entity.getName());
+		objToBeUpdated.setEmail(entity.getEmail());
+		objToBeUpdated.setPhone(entity.getPhone());
+		repo.save(objToBeUpdated);
+	}
 }

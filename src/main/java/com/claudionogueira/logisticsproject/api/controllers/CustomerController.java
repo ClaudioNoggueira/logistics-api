@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,5 +40,10 @@ public class CustomerController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void add(@RequestBody Customer obj) {
 		service.add(obj);
+	}
+
+	@PutMapping(value = "/update/{id}")
+	public void update(@PathVariable Long id, @RequestBody Customer obj) {
+		service.update(id, obj);
 	}
 }

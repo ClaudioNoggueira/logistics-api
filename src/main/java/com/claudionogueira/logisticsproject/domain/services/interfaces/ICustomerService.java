@@ -12,4 +12,5 @@ public interface ICustomerService {
 
 	void add(Customer entity);
 
+	void update(Long id, Customer entity);
 }
