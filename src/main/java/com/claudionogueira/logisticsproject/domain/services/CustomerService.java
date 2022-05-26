@@ -42,4 +42,10 @@ public class CustomerService implements ICustomerService {
 		objToBeUpdated.setPhone(entity.getPhone());
 		repo.save(objToBeUpdated);
 	}
+
+	@Override
+	public void delete(Long id) {
+		Customer obj = this.findById(id);
+		repo.delete(obj);
+	}
 }
