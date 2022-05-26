@@ -22,4 +22,9 @@ public class CustomerService implements ICustomerService {
 		return repo.findAll();
 	}
 
+	@Override
+	public Customer findById(Long id) {
+		return repo.findById(id).map(customer -> customer).orElse(null);
+	}
+
 }
