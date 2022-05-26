@@ -9,4 +9,6 @@ public interface ICustomerService {
 	List<Customer> findAll();
 	
 	Customer findById(Long id);
+	
+	void add(Customer entity);
 }

@@ -24,7 +24,11 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public Customer findById(Long id) {
-		return repo.findById(id).map(customer -> customer).orElse(null);
+		return repo.findById(id).map(entity -> entity).orElse(null);
 	}
 
+	@Override
+	public void add(Customer entity) {
+		repo.save(entity);
+	}
 }
