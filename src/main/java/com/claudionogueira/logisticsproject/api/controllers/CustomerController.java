@@ -1,8 +1,12 @@
 package com.claudionogueira.logisticsproject.api.controllers;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.claudionogueira.logisticsproject.domain.models.Customer;
 import com.claudionogueira.logisticsproject.domain.services.CustomerService;
 
 @RestController
@@ -13,5 +17,10 @@ public class CustomerController {
 
 	public CustomerController(CustomerService service) {
 		this.service = service;
+	}
+	
+	@GetMapping()
+	public List<Customer> findAll(){
+		return service.findAll();
 	}
 }
