@@ -11,7 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
+import com.claudionogueira.logisticsproject.domain.ValidationGroups;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -23,6 +28,7 @@ public class Delivery {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	private BigDecimal fee;
 
 	@JsonProperty(access = Access.READ_ONLY)
@@ -31,9 +37,13 @@ public class Delivery {
 	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime conclusionDate;
 
+	@ConvertGroup(from = Default.class, to = ValidationGroups.CustomerID.class)
+	@Valid
+	@NotNull
 	@ManyToOne
 	private Customer customer;
 
+	@NotNull
 	@Embedded
 	private Receiver receiver;
 

@@ -1,5 +1,7 @@
 package com.claudionogueira.logisticsproject.api.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ public class DeliveryController {
 
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void add(@RequestBody Delivery entity) {
+	public void add(@Valid @RequestBody Delivery entity) {
 		service.add(entity);
 	}
 }
