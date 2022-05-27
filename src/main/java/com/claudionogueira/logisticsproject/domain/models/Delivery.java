@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Delivery {
@@ -22,7 +24,11 @@ public class Delivery {
 	private Long id;
 
 	private BigDecimal fee;
+
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime requestDate;
+
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime conclusionDate;
 
 	@ManyToOne
@@ -31,6 +37,7 @@ public class Delivery {
 	@Embedded
 	private Receiver receiver;
 
+	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private DeliveryStatus status;
 
