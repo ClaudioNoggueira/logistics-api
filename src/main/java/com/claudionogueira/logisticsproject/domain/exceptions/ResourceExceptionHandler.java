@@ -1,6 +1,6 @@
 package com.claudionogueira.logisticsproject.domain.exceptions;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,21 +19,21 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(DomainException.class)
 	public ResponseEntity<Object> handleDomainException(DomainException e, WebRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		StandardError error = new StandardError(LocalDateTime.now(), status.value(), "Domain error", e.getMessage());
+		StandardError error = new StandardError(OffsetDateTime.now(), status.value(), "Domain error", e.getMessage());
 		return handleExceptionInternal(e, error, new HttpHeaders(), status, request);
 	}
 
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
-		StandardError error = new StandardError(LocalDateTime.now(), status.value(), "Not found", e.getMessage());
+		StandardError error = new StandardError(OffsetDateTime.now(), status.value(), "Not found", e.getMessage());
 		return ResponseEntity.status(status).body(error);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		StandardError error = new StandardError(LocalDateTime.now(), status.value(), "Invalid argument", null);
+		StandardError error = new StandardError(OffsetDateTime.now(), status.value(), "Invalid argument", null);
 
 		for (ObjectError oe : ex.getBindingResult().getAllErrors()) {
 			String name = ((FieldError) oe).getField();

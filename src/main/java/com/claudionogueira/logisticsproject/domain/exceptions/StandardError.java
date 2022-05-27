@@ -1,6 +1,6 @@
 package com.claudionogueira.logisticsproject.domain.exceptions;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(content = Include.NON_NULL)
 public class StandardError {
 
-	private LocalDateTime instant;
+	private OffsetDateTime instant;
 	private Integer status;
 	private String error;
 	private String message;
@@ -21,18 +21,18 @@ public class StandardError {
 
 	}
 
-	public StandardError(LocalDateTime instant, Integer status, String error, String message) {
+	public StandardError(OffsetDateTime instant, Integer status, String error, String message) {
 		this.instant = instant;
 		this.status = status;
 		this.error = error;
 		this.message = message;
 	}
 
-	public LocalDateTime getInstant() {
+	public OffsetDateTime getInstant() {
 		return instant;
 	}
 
-	public void setInstant(LocalDateTime instant) {
+	public void setInstant(OffsetDateTime instant) {
 		this.instant = instant;
 	}
 

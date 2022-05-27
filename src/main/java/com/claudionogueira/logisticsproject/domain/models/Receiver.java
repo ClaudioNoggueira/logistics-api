@@ -20,7 +20,7 @@ public class Receiver implements Serializable {
 
 	@NotBlank
 	@Column(name = "receiver_number")
-	private Integer number;
+	private String number;
 
 	@NotBlank
 	@Column(name = "receiver_district")
@@ -33,7 +33,7 @@ public class Receiver implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Receiver(String name, String address, Integer number, String district, String complement) {
+	public Receiver(String name, String address, String number, String district, String complement) {
 		this.name = name;
 		this.address = address;
 		this.number = number;
@@ -57,11 +57,11 @@ public class Receiver implements Serializable {
 		this.address = address;
 	}
 
-	public Integer getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

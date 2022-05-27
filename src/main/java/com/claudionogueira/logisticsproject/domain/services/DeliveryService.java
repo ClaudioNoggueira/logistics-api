@@ -1,6 +1,6 @@
 package com.claudionogueira.logisticsproject.domain.services;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -28,7 +28,7 @@ public class DeliveryService implements IDeliveryService {
 	@Override
 	public void add(Delivery entity) {
 		entity.setCustomer(customerService.findById(entity.getCustomer().getId()));
-		entity.setRequestDate(LocalDateTime.now());
+		entity.setRequestDate(OffsetDateTime.now());
 		entity.setStatus(DeliveryStatus.PENDING);
 		deliveryRepo.save(entity);
 	}

@@ -1,7 +1,7 @@
 package com.claudionogueira.logisticsproject.domain.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -32,10 +32,10 @@ public class Delivery {
 	private BigDecimal fee;
 
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime requestDate;
+	private OffsetDateTime requestDate;
 
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime conclusionDate;
+	private OffsetDateTime conclusionDate;
 
 	@ConvertGroup(from = Default.class, to = ValidationGroups.CustomerID.class)
 	@Valid
@@ -43,6 +43,7 @@ public class Delivery {
 	@ManyToOne
 	private Customer customer;
 
+	@Valid
 	@NotNull
 	@Embedded
 	private Receiver receiver;
@@ -55,8 +56,8 @@ public class Delivery {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Delivery(Long id, BigDecimal fee, LocalDateTime requestDate, LocalDateTime conclusionDate, Customer customer,
-			Receiver receiver, DeliveryStatus status) {
+	public Delivery(Long id, BigDecimal fee, OffsetDateTime requestDate, OffsetDateTime conclusionDate,
+			Customer customer, Receiver receiver, DeliveryStatus status) {
 		this.id = id;
 		this.fee = fee;
 		this.requestDate = requestDate;
@@ -82,19 +83,19 @@ public class Delivery {
 		this.fee = fee;
 	}
 
-	public LocalDateTime getRequestDate() {
+	public OffsetDateTime getRequestDate() {
 		return requestDate;
 	}
 
-	public void setRequestDate(LocalDateTime requestDate) {
+	public void setRequestDate(OffsetDateTime requestDate) {
 		this.requestDate = requestDate;
 	}
 
-	public LocalDateTime getConclusionDate() {
+	public OffsetDateTime getConclusionDate() {
 		return conclusionDate;
 	}
 
-	public void setConclusionDate(LocalDateTime conclusionDate) {
+	public void setConclusionDate(OffsetDateTime conclusionDate) {
 		this.conclusionDate = conclusionDate;
 	}
 
