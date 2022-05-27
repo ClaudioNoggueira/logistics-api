@@ -1,31 +1,39 @@
 package com.claudionogueira.logisticsproject.domain.exceptions;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(content = Include.NON_NULL)
 public class StandardError {
 
-	private Long timestamp;
+	private LocalDateTime instant;
 	private Integer status;
 	private String error;
 	private String message;
-	private String path;
+
+	private List<Field> fields = new ArrayList<>();
 
 	public StandardError() {
 
 	}
 
-	public StandardError(Long timestamp, Integer status, String error, String message, String path) {
-		this.timestamp = timestamp;
+	public StandardError(LocalDateTime instant, Integer status, String error, String message) {
+		this.instant = instant;
 		this.status = status;
 		this.error = error;
 		this.message = message;
-		this.path = path;
 	}
 
-	public Long getTimestamp() {
-		return timestamp;
+	public LocalDateTime getInstant() {
+		return instant;
 	}
 
-	public void setTimestamp(Long timestamp) {
-		this.timestamp = timestamp;
+	public void setInstant(LocalDateTime instant) {
+		this.instant = instant;
 	}
 
 	public Integer getStatus() {
@@ -52,11 +60,33 @@ public class StandardError {
 		this.message = message;
 	}
 
-	public String getPath() {
-		return path;
+	public List<Field> getFields() {
+		return fields;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void addField(String name, String message) {
+		fields.add(new Field(name, message));
+	}
+
+	public void removeField(String name, String message) {
+		fields.remove(new Field(name, message));
+	}
+
+	public static class Field {
+		private String name;
+		private String message;
+
+		public Field(String name, String message) {
+			this.name = name;
+			this.message = message;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getMessage() {
+			return message;
+		}
 	}
 }
