@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 import com.claudionogueira.logisticsproject.domain.repositories.DeliveryRepo;
@@ -36,6 +37,13 @@ public class DeliveryService implements IDeliveryService {
 	@Override
 	public List<Delivery> findAll() {
 		return deliveryRepo.findAll();
+	}
+
+	@Transactional
+	@Override
+	public Delivery findById(Long id) {
+		return deliveryRepo.findById(id).map(delivery -> delivery)
+				.orElseThrow(() -> new ObjectNotFoundException("Delivery with ID: '" + id + "' not found."));
 	}
 
 }

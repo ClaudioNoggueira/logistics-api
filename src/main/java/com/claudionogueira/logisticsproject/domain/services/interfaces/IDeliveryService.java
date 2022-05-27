@@ -9,4 +9,6 @@ public interface IDeliveryService {
 	void add(Delivery entity);
 	
 	List<Delivery> findAll();
+	
+	Delivery findById(Long id);
 }
