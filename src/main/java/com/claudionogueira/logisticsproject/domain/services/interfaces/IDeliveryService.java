@@ -2,6 +2,7 @@ package com.claudionogueira.logisticsproject.domain.services.interfaces;
 
 import java.util.List;
 
+import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 
 public interface IDeliveryService {
@@ -10,5 +11,5 @@ public interface IDeliveryService {
 	
 	List<Delivery> findAll();
 	
-	Delivery findById(Long id);
+	DeliveryDTO findById(Long id);
 }

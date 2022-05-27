@@ -3,6 +3,7 @@ package com.claudionogueira.logisticsproject.api.dtos;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+import com.claudionogueira.logisticsproject.domain.models.Delivery;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 
 public class DeliveryDTO {
@@ -17,6 +18,16 @@ public class DeliveryDTO {
 
 	public DeliveryDTO() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public DeliveryDTO(Delivery entity) {
+		this.id = entity.getId();
+		this.customerName = entity.getCustomer().getName();
+		this.setReceiver(new ReceiverDTO(entity.getReceiver()));
+		this.fee = entity.getFee();
+		this.status = entity.getStatus();
+		this.requestDate = entity.getRequestDate();
+		this.conclusionDate = entity.getConclusionDate();
 	}
 
 	public DeliveryDTO(Long id, String customerName, ReceiverDTO receiver, BigDecimal fee, DeliveryStatus status,

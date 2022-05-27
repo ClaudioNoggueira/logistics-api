@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
 import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
@@ -41,8 +42,8 @@ public class DeliveryService implements IDeliveryService {
 
 	@Transactional
 	@Override
-	public Delivery findById(Long id) {
-		return deliveryRepo.findById(id).map(delivery -> delivery)
+	public DeliveryDTO findById(Long id) {
+		return deliveryRepo.findById(id).map(delivery -> new DeliveryDTO(delivery))
 				.orElseThrow(() -> new ObjectNotFoundException("Delivery with ID: '" + id + "' not found."));
 	}
 

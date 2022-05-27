@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 import com.claudionogueira.logisticsproject.domain.services.DeliveryService;
 
@@ -33,7 +34,7 @@ public class DeliveryController {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Delivery> findById(@PathVariable Long id) {
+	public ResponseEntity<DeliveryDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
