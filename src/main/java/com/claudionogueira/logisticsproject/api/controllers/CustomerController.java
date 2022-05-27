@@ -2,6 +2,8 @@ package com.claudionogueira.logisticsproject.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,15 +41,16 @@ public class CustomerController {
 
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void add(@RequestBody Customer obj) {
+	public void add(@Valid @RequestBody Customer obj) {
 		service.add(obj);
 	}
+
 
 	@PutMapping(value = "/update/{id}")
 	public void update(@PathVariable Long id, @RequestBody Customer obj) {
 		service.update(id, obj);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
