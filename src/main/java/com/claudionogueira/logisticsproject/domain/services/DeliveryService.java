@@ -1,6 +1,7 @@
 package com.claudionogueira.logisticsproject.domain.services;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -30,4 +31,11 @@ public class DeliveryService implements IDeliveryService {
 		entity.setStatus(DeliveryStatus.PENDING);
 		deliveryRepo.save(entity);
 	}
+
+	@Transactional
+	@Override
+	public List<Delivery> findAll() {
+		return deliveryRepo.findAll();
+	}
+
 }
