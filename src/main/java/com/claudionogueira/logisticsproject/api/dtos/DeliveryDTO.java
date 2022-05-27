@@ -9,6 +9,7 @@ public class DeliveryDTO {
 
 	private Long id;
 	private String customerName;
+	private ReceiverDTO receiver;
 	private BigDecimal fee;
 	private DeliveryStatus status;
 	private OffsetDateTime requestDate;
@@ -18,10 +19,11 @@ public class DeliveryDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DeliveryDTO(Long id, String customerName, BigDecimal fee, DeliveryStatus status, OffsetDateTime requestDate,
-			OffsetDateTime conclusionDate) {
+	public DeliveryDTO(Long id, String customerName, ReceiverDTO receiver, BigDecimal fee, DeliveryStatus status,
+			OffsetDateTime requestDate, OffsetDateTime conclusionDate) {
 		this.id = id;
 		this.customerName = customerName;
+		this.receiver = receiver;
 		this.fee = fee;
 		this.status = status;
 		this.requestDate = requestDate;
@@ -42,6 +44,14 @@ public class DeliveryDTO {
 
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+
+	public ReceiverDTO getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(ReceiverDTO receiver) {
+		this.receiver = receiver;
 	}
 
 	public BigDecimal getFee() {
