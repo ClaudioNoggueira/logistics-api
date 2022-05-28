@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
 import com.claudionogueira.logisticsproject.domain.models.Customer;
 import com.claudionogueira.logisticsproject.domain.services.CustomerService;
 
@@ -30,12 +31,12 @@ public class CustomerController {
 	}
 
 	@GetMapping()
-	public List<Customer> findAll() {
+	public List<CustomerDTO> findAll() {
 		return service.findAll();
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Customer> findById(@PathVariable Long id) {
+	public ResponseEntity<CustomerDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
