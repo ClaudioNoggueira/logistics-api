@@ -5,4 +5,12 @@ public interface ValidationGroups {
 	public interface CustomerID {
 
 	}
+
+	public interface CustomerName {
+
+	}
+
+	public interface CustomerPhone {
+
+	}
 }
