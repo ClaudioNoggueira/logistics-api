@@ -1,5 +1,8 @@
 package com.claudionogueira.logisticsproject.domain.services.utils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -22,5 +25,9 @@ public class CustomerMapper {
 
 	public Customer toEntity(CustomerDTO dto) {
 		return mapper.map(dto, Customer.class);
+	}
+
+	public List<CustomerDTO> toListDTO(List<Customer> list) {
+		return list.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 }
