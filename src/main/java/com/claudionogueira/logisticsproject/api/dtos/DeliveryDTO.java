@@ -8,7 +8,7 @@ import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 public class DeliveryDTO {
 
 	private Long id;
-	private String customerName;
+	private DeliveryCustomerInfo customer;
 	private ReceiverDTO receiver;
 	private BigDecimal fee;
 	private DeliveryStatus status;
@@ -19,10 +19,11 @@ public class DeliveryDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public DeliveryDTO(Long id, String customerName, ReceiverDTO receiver, BigDecimal fee, DeliveryStatus status,
-			OffsetDateTime requestDate, OffsetDateTime conclusionDate) {
+	public DeliveryDTO(Long id, DeliveryCustomerInfo customer, ReceiverDTO receiver, BigDecimal fee,
+			DeliveryStatus status, OffsetDateTime requestDate, OffsetDateTime conclusionDate) {
+		super();
 		this.id = id;
-		this.customerName = customerName;
+		this.customer = customer;
 		this.receiver = receiver;
 		this.fee = fee;
 		this.status = status;
@@ -38,12 +39,12 @@ public class DeliveryDTO {
 		this.id = id;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public DeliveryCustomerInfo getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCustomer(DeliveryCustomerInfo customer) {
+		this.customer = customer;
 	}
 
 	public ReceiverDTO getReceiver() {
@@ -84,5 +85,38 @@ public class DeliveryDTO {
 
 	public void setConclusionDate(OffsetDateTime conclusionDate) {
 		this.conclusionDate = conclusionDate;
+	}
+
+	public static class DeliveryCustomerInfo {
+
+		private Long id;
+
+		private String name;
+
+		public DeliveryCustomerInfo() {
+
+		}
+
+		public DeliveryCustomerInfo(Long id, String name) {
+			super();
+			this.id = id;
+			this.name = name;
+		}
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 }
