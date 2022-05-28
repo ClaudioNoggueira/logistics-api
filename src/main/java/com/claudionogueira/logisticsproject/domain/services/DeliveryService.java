@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.DeliveryInput;
 import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
@@ -30,10 +31,13 @@ public class DeliveryService implements IDeliveryService {
 
 	@Transactional
 	@Override
-	public void add(Delivery entity) {
+	public void add(DeliveryInput input) {
+		Delivery entity = deliveryMapper.toEntity(input);
+
 		entity.setCustomer(customerService.findById(entity.getCustomer().getId()));
 		entity.setRequestDate(OffsetDateTime.now());
 		entity.setStatus(DeliveryStatus.PENDING);
+
 		deliveryRepo.save(entity);
 	}
 

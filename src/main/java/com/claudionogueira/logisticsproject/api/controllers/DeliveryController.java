@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
-import com.claudionogueira.logisticsproject.domain.models.Delivery;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.DeliveryInput;
 import com.claudionogueira.logisticsproject.domain.services.DeliveryService;
 
 @RestController
@@ -40,7 +40,7 @@ public class DeliveryController {
 
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void add(@Valid @RequestBody Delivery entity) {
-		service.add(entity);
+	public void add(@Valid @RequestBody DeliveryInput input) {
+		service.add(input);
 	}
 }
