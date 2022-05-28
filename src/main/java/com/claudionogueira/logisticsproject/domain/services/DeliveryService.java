@@ -39,8 +39,8 @@ public class DeliveryService implements IDeliveryService {
 
 	@Transactional
 	@Override
-	public List<Delivery> findAll() {
-		return deliveryRepo.findAll();
+	public List<DeliveryDTO> findAll() {
+		return deliveryMapper.toListDTO(deliveryRepo.findAll());
 	}
 
 	@Transactional

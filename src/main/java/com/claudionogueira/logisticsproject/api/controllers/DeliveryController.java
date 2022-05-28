@@ -29,7 +29,7 @@ public class DeliveryController {
 	}
 
 	@GetMapping()
-	public List<Delivery> findAll() {
+	public List<DeliveryDTO> findAll() {
 		return service.findAll();
 	}
 

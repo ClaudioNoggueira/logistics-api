@@ -9,7 +9,7 @@ public interface IDeliveryService {
 
 	void add(Delivery entity);
 	
-	List<Delivery> findAll();
+	List<DeliveryDTO> findAll();
 	
 	DeliveryDTO findById(Long id);
 }

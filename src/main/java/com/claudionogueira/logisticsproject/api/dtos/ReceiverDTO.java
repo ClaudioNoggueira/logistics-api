@@ -1,7 +1,5 @@
 package com.claudionogueira.logisticsproject.api.dtos;
 
-import com.claudionogueira.logisticsproject.domain.models.Receiver;
-
 public class ReceiverDTO {
 
 	private String name;
@@ -12,14 +10,6 @@ public class ReceiverDTO {
 
 	public ReceiverDTO() {
 
-	}
-
-	public ReceiverDTO(Receiver entity) {
-		this.name = entity.getName();
-		this.address = entity.getAddress();
-		this.number = entity.getNumber();
-		this.district = entity.getDistrict();
-		this.complement = entity.getComplement();
 	}
 
 	public ReceiverDTO(String name, String address, String number, String district, String complement) {
