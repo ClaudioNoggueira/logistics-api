@@ -3,7 +3,7 @@ package com.claudionogueira.logisticsproject.domain.services.interfaces;
 import java.util.List;
 
 import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
-import com.claudionogueira.logisticsproject.domain.models.Customer;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.CustomerInput;
 
 public interface ICustomerService {
 
@@ -11,9 +11,9 @@ public interface ICustomerService {
 
 	CustomerDTO findById(Long id);
 
-	void add(Customer entity);
+	void add(CustomerInput input);
 
-	void update(Long id, Customer entity);
+	void update(Long id, CustomerInput input);
 
 	void delete(Long id);
 }

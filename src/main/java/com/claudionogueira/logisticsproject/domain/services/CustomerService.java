@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.CustomerInput;
 import com.claudionogueira.logisticsproject.domain.exceptions.DomainException;
 import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Customer;
@@ -36,28 +37,29 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public void add(Customer entity) {
+	public void add(CustomerInput input) {
+		Customer entity = mapper.fromInputToEntity(input);
 		boolean emailExists = repo.findByEmail(entity.getEmail()).stream()
 				.anyMatch(existingCustomer -> !existingCustomer.equals(entity));
 
 		if (emailExists)
 			throw new DomainException("Email is already in use.");
 
-		repo.save(entity);
+		repo.save(mapper.fromInputToEntity(input));
 	}
 
 	@Override
-	public void update(Long id, Customer entity) {
+	public void update(Long id, CustomerInput input) {
 		Customer objToBeUpdated = mapper.toEntity(this.findById(id));
 
-		if (entity.getName() != null && !entity.getName().isBlank())
-			objToBeUpdated.setName(entity.getName());
+		if (input.getName() != null && !input.getName().isBlank())
+			objToBeUpdated.setName(input.getName());
 
-		if (entity.getEmail() != null && !entity.getEmail().isBlank())
-			objToBeUpdated.setEmail(entity.getEmail());
+		if (input.getEmail() != null && !input.getEmail().isBlank())
+			objToBeUpdated.setEmail(input.getEmail());
 
-		if (entity.getPhone() != null && !entity.getPhone().isBlank())
-			objToBeUpdated.setPhone(entity.getPhone());
+		if (input.getPhone() != null && !input.getPhone().isBlank())
+			objToBeUpdated.setPhone(input.getPhone());
 
 		repo.save(objToBeUpdated);
 	}

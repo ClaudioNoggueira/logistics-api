@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
-import com.claudionogueira.logisticsproject.domain.models.Customer;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.CustomerInput;
 import com.claudionogueira.logisticsproject.domain.services.CustomerService;
 
 @RestController
@@ -42,14 +42,13 @@ public class CustomerController {
 
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public void add(@Valid @RequestBody Customer obj) {
-		service.add(obj);
+	public void add(@Valid @RequestBody CustomerInput input) {
+		service.add(input);
 	}
 
-
 	@PutMapping(value = "/update/{id}")
-	public void update(@PathVariable Long id, @RequestBody Customer obj) {
-		service.update(id, obj);
+	public void update(@PathVariable Long id, @RequestBody CustomerInput input) {
+		service.update(id, input);
 	}
 
 	@DeleteMapping(value = "/{id}")
