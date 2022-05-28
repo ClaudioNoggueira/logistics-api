@@ -3,6 +3,9 @@ package com.claudionogueira.logisticsproject.domain.services.utils;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
+import com.claudionogueira.logisticsproject.domain.models.Customer;
+
 @Component
 public class CustomerMapper {
 
@@ -13,4 +16,7 @@ public class CustomerMapper {
 		this.mapper = mapper;
 	}
 
+	public CustomerDTO toDTO(Customer entity) {
+		return mapper.map(entity, CustomerDTO.class);
+	}
 }
