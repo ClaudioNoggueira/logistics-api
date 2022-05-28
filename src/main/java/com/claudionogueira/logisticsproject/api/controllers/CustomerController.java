@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.claudionogueira.logisticsproject.api.dtos.CustomerDTO;
 import com.claudionogueira.logisticsproject.api.dtos.inputs.CustomerInput;
+import com.claudionogueira.logisticsproject.api.dtos.updates.CustomerUpdate;
 import com.claudionogueira.logisticsproject.domain.services.CustomerService;
 
 @RestController
@@ -47,8 +48,8 @@ public class CustomerController {
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public void update(@PathVariable Long id, @RequestBody CustomerInput input) {
-		service.update(id, input);
+	public void update(@PathVariable Long id, @Valid @RequestBody CustomerUpdate update) {
+		service.update(id, update);
 	}
 
 	@DeleteMapping(value = "/{id}")
