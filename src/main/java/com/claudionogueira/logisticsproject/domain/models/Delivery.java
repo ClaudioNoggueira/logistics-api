@@ -31,10 +31,8 @@ public class Delivery {
 	@NotNull
 	private BigDecimal fee;
 
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime requestDate;
 
-	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime conclusionDate;
 
 	@ConvertGroup(from = Default.class, to = ValidationGroups.CustomerID.class)
