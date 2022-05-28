@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
+import com.claudionogueira.logisticsproject.api.dtos.inputs.DeliveryInput;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
 
 @Component
@@ -24,5 +25,9 @@ public class DeliveryMapper {
 
 	public List<DeliveryDTO> toListDTO(List<Delivery> deliveries) {
 		return deliveries.stream().map(this::toDTO).collect(Collectors.toList());
+	}
+
+	public Delivery toEntity(DeliveryInput input) {
+		return mapper.map(input, Delivery.class);
 	}
 }
