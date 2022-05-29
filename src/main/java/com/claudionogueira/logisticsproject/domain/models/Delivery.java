@@ -118,16 +118,17 @@ public class Delivery {
 		this.status = status;
 	}
 
+
+	public List<Occurence> getOccurences() {
+		return occurences;
+	}
+
 	public void addOccurence(Occurence obj) {
 		occurences.add(obj);
 	}
 
 	public void removeOccurence(Occurence obj) {
 		occurences.remove(obj);
-	}
-
-	public List<Occurence> getOccurences() {
-		return occurences;
 	}
 
 	@Override
