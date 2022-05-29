@@ -23,11 +23,15 @@ public class DeliveryMapper {
 		return mapper.map(entity, DeliveryDTO.class);
 	}
 
-	public List<DeliveryDTO> toListDTO(List<Delivery> deliveries) {
-		return deliveries.stream().map(this::toDTO).collect(Collectors.toList());
+	public Delivery fromDTOtoEntity(DeliveryDTO dto) {
+		return mapper.map(dto, Delivery.class);
 	}
 
-	public Delivery toEntity(DeliveryInput input) {
+	public Delivery fromInputToEntity(DeliveryInput input) {
 		return mapper.map(input, Delivery.class);
+	}
+
+	public List<DeliveryDTO> toListDTO(List<Delivery> deliveries) {
+		return deliveries.stream().map(this::toDTO).collect(Collectors.toList());
 	}
 }

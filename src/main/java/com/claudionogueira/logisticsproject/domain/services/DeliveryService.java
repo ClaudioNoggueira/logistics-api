@@ -37,7 +37,7 @@ public class DeliveryService implements IDeliveryService {
 	@Transactional
 	@Override
 	public void add(DeliveryInput input) {
-		Delivery entity = deliveryMapper.toEntity(input);
+		Delivery entity = deliveryMapper.fromInputToEntity(input);
 
 		entity.setCustomer(customerMapper.toEntity(customerService.findById(entity.getCustomer().getId())));
 		entity.setRequestDate(OffsetDateTime.now());
