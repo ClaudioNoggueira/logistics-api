@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -44,7 +45,7 @@ public class Delivery {
 	@Enumerated(EnumType.STRING)
 	private DeliveryStatus status;
 
-	@OneToMany(mappedBy = "delivery")
+	@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
 	private List<Occurence> occurences = new ArrayList<>();
 
 	public Delivery() {
@@ -118,17 +119,16 @@ public class Delivery {
 		this.status = status;
 	}
 
-
 	public List<Occurence> getOccurences() {
 		return occurences;
 	}
 
 	public void addOccurence(Occurence obj) {
-		occurences.add(obj);
+		this.getOccurences().add(obj);
 	}
 
 	public void removeOccurence(Occurence obj) {
-		occurences.remove(obj);
+		this.getOccurences().remove(obj);
 	}
 
 	@Override
