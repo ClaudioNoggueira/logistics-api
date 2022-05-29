@@ -2,7 +2,10 @@ package com.claudionogueira.logisticsproject.domain.models;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,15 +14,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.Valid;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.groups.ConvertGroup;
-import javax.validation.groups.Default;
 
-import com.claudionogueira.logisticsproject.domain.ValidationGroups;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 public class Delivery {
@@ -31,24 +29,23 @@ public class Delivery {
 	@NotNull
 	private BigDecimal fee;
 
+	@Column(name = "request_date")
 	private OffsetDateTime requestDate;
 
+	@Column(name = "conclusion_date")
 	private OffsetDateTime conclusionDate;
 
-	@ConvertGroup(from = Default.class, to = ValidationGroups.CustomerID.class)
-	@Valid
-	@NotNull
 	@ManyToOne
 	private Customer customer;
 
-	@Valid
-	@NotNull
 	@Embedded
 	private Receiver receiver;
 
-	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private DeliveryStatus status;
+
+	@OneToMany(mappedBy = "delivery")
+	private List<Occurence> occurences = new ArrayList<>();
 
 	public Delivery() {
 		// TODO Auto-generated constructor stub
@@ -119,6 +116,18 @@ public class Delivery {
 
 	public void setStatus(DeliveryStatus status) {
 		this.status = status;
+	}
+
+	public void addOccurence(Occurence obj) {
+		occurences.add(obj);
+	}
+
+	public void removeOccurence(Occurence obj) {
+		occurences.remove(obj);
+	}
+
+	public List<Occurence> getOccurences() {
+		return occurences;
 	}
 
 	@Override
