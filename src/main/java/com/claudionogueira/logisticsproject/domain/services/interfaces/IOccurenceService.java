@@ -6,7 +6,7 @@ import com.claudionogueira.logisticsproject.api.dtos.OccurenceDTO;
 
 public interface IOccurenceService {
 
-	void register(Long deliveryID, String description);
-
 	List<OccurenceDTO> findAll(Long deliveryID);
+
+	void register(Long deliveryID, String description);
 }

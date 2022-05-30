@@ -59,4 +59,13 @@ public class DeliveryService implements IDeliveryService {
 				.orElseThrow(() -> new ObjectNotFoundException("Delivery with ID: '" + id + "' not found."));
 	}
 
+	@Transactional
+	@Override
+	public void conclude(Long deliveryID) {
+		Delivery entity = deliveryMapper.fromDTOtoEntity(this.findById(deliveryID));
+
+		entity.conclude();
+
+		deliveryRepo.save(entity);
+	}
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -42,5 +43,11 @@ public class DeliveryController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void add(@Valid @RequestBody DeliveryInput input) {
 		service.add(input);
+	}
+
+	@PutMapping(value = "/{id}/conclusion")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void conclude(@PathVariable Long id) {
+		service.conclude(id);
 	}
 }

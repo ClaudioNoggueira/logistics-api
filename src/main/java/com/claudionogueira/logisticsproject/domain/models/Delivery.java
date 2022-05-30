@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.claudionogueira.logisticsproject.domain.exceptions.DomainException;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 
 @Entity
@@ -131,6 +132,18 @@ public class Delivery {
 		this.getOccurences().remove(obj);
 	}
 
+	public void conclude() {
+		if (cannotBeConcluded())
+			throw new DomainException("Delivery could not be completed.");
+
+		this.setStatus(DeliveryStatus.COMPLETED);
+		this.setConclusionDate(OffsetDateTime.now());
+	}
+
+	public boolean cannotBeConcluded() {
+		return !this.getStatus().equals(DeliveryStatus.PENDING);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,4 +168,5 @@ public class Delivery {
 			return false;
 		return true;
 	}
+
 }
