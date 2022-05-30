@@ -7,23 +7,24 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.claudionogueira.logisticsproject.api.dtos.OccurenceDTO;
+import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
+import com.claudionogueira.logisticsproject.domain.repositories.DeliveryRepo;
 import com.claudionogueira.logisticsproject.domain.services.interfaces.IOccurenceService;
-import com.claudionogueira.logisticsproject.domain.services.utils.DeliveryMapper;
 import com.claudionogueira.logisticsproject.domain.services.utils.OccurenceMapper;
 
 @Service
 public class OccurenceService implements IOccurenceService {
 
+	private final DeliveryRepo deliveryRepo;
 	private final DeliveryService deliveryService;
-	private final DeliveryMapper deliveryMapper;
 	private final OccurenceMapper occurenceMapper;
 
-	public OccurenceService(DeliveryService deliveryService, DeliveryMapper deliveryMapper,
+	public OccurenceService(DeliveryRepo deliveryRepo, DeliveryService deliveryService,
 			OccurenceMapper occurenceMapper) {
 		super();
+		this.deliveryRepo = deliveryRepo;
 		this.deliveryService = deliveryService;
-		this.deliveryMapper = deliveryMapper;
 		this.occurenceMapper = occurenceMapper;
 	}
 
@@ -36,7 +37,9 @@ public class OccurenceService implements IOccurenceService {
 	@Transactional
 	@Override
 	public List<OccurenceDTO> findAll(Long deliveryID) {
-		Delivery entity = deliveryMapper.fromDTOtoEntity(deliveryService.findById(deliveryID));
+		Delivery entity = deliveryRepo.findById(deliveryID)
+				.orElseThrow(() -> new ObjectNotFoundException("Delivery with ID: '" + deliveryID + "' not found."));
+
 		return occurenceMapper.toListDTO(entity.getOccurences());
 	}
 }
