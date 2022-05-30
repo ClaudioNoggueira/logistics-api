@@ -9,6 +9,8 @@ public interface IDeliveryService {
 
 	void add(DeliveryInput entity);
 	
+	void addOccurence(Long deliveryID, String description);
+	
 	void conclude(Long deliveryID);
 	
 	List<DeliveryDTO> findAll();

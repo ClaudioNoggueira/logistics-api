@@ -11,6 +11,7 @@ import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
 import com.claudionogueira.logisticsproject.api.dtos.inputs.DeliveryInput;
 import com.claudionogueira.logisticsproject.domain.exceptions.ObjectNotFoundException;
 import com.claudionogueira.logisticsproject.domain.models.Delivery;
+import com.claudionogueira.logisticsproject.domain.models.Occurence;
 import com.claudionogueira.logisticsproject.domain.models.enums.DeliveryStatus;
 import com.claudionogueira.logisticsproject.domain.repositories.DeliveryRepo;
 import com.claudionogueira.logisticsproject.domain.services.interfaces.IDeliveryService;
@@ -57,6 +58,14 @@ public class DeliveryService implements IDeliveryService {
 	public DeliveryDTO findById(Long id) {
 		return deliveryRepo.findById(id).map(delivery -> deliveryMapper.toDTO(delivery))
 				.orElseThrow(() -> new ObjectNotFoundException("Delivery with ID: '" + id + "' not found."));
+	}
+
+	@Transactional
+	@Override
+	public void addOccurence(Long deliveryID, String description) {
+		Delivery delivery = deliveryMapper.fromDTOtoEntity(this.findById(deliveryID));
+		delivery.addOccurence(new Occurence(null, delivery, description, OffsetDateTime.now()));
+		deliveryRepo.save(delivery);
 	}
 
 	@Transactional
