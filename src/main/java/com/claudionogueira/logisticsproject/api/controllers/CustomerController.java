@@ -21,6 +21,10 @@ import com.claudionogueira.logisticsproject.api.dtos.inputs.CustomerInput;
 import com.claudionogueira.logisticsproject.api.dtos.updates.CustomerUpdate;
 import com.claudionogueira.logisticsproject.domain.services.CustomerService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "RESTful API for a logistics project")
 @RestController
 @RequestMapping(value = "/api/v1/customers")
 public class CustomerController {
@@ -31,27 +35,32 @@ public class CustomerController {
 		this.service = service;
 	}
 
+	@ApiOperation(value = "Return list of all customers")
 	@GetMapping()
 	public List<CustomerDTO> findAll() {
 		return service.findAll();
 	}
 
+	@ApiOperation(value = "Return one customer based on it's ID")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CustomerDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
+	@ApiOperation(value = "Add new customer")
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void add(@Valid @RequestBody CustomerInput input) {
 		service.add(input);
 	}
 
+	@ApiOperation(value = "Update customer info based on it's ID")
 	@PutMapping(value = "/update/{id}")
 	public void update(@PathVariable Long id, @Valid @RequestBody CustomerUpdate update) {
 		service.update(id, update);
 	}
 
+	@ApiOperation(value = "Delete customer based on it's ID")
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
