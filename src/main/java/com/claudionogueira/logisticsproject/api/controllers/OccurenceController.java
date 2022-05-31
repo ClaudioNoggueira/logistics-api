@@ -17,6 +17,8 @@ import com.claudionogueira.logisticsproject.api.dtos.OccurenceDTO;
 import com.claudionogueira.logisticsproject.api.dtos.inputs.OccurenceInput;
 import com.claudionogueira.logisticsproject.domain.services.OccurenceService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/api/v1/deliveries/{deliveryId}/occurences")
 public class OccurenceController {
@@ -28,11 +30,13 @@ public class OccurenceController {
 		this.service = service;
 	}
 
+	@ApiOperation(value = "Return list of all occurences in a particular delivery based on delivery ID")
 	@GetMapping
 	public List<OccurenceDTO> findAll(@PathVariable Long deliveryId) {
 		return service.findAll(deliveryId);
 	}
 
+	@ApiOperation(value = "Add new occurence in a delivery based on delivery ID")
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void register(@PathVariable Long deliveryId, @Valid @RequestBody OccurenceInput input) {

@@ -19,6 +19,10 @@ import com.claudionogueira.logisticsproject.api.dtos.DeliveryDTO;
 import com.claudionogueira.logisticsproject.api.dtos.inputs.DeliveryInput;
 import com.claudionogueira.logisticsproject.domain.services.DeliveryService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(value = "RESTful API for a logistics project")
 @RestController
 @RequestMapping(value = "/api/v1/deliveries")
 public class DeliveryController {
@@ -29,22 +33,26 @@ public class DeliveryController {
 		this.service = service;
 	}
 
+	@ApiOperation(value = "Return list of all deliveries")
 	@GetMapping()
 	public List<DeliveryDTO> findAll() {
 		return service.findAll();
 	}
 
+	@ApiOperation(value = "Return one delivery based on it's ID")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<DeliveryDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
+	@ApiOperation(value = "Add new delivery")
 	@PostMapping(value = "/add")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public void add(@Valid @RequestBody DeliveryInput input) {
 		service.add(input);
 	}
 
+	@ApiOperation(value = "Conclude delivery based on it's ID")
 	@PutMapping(value = "/{id}/conclusion")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void conclude(@PathVariable Long id) {
