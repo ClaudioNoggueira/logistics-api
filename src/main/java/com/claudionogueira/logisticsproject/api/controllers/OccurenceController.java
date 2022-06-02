@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +18,11 @@ import com.claudionogueira.logisticsproject.api.dtos.OccurenceDTO;
 import com.claudionogueira.logisticsproject.api.dtos.inputs.OccurenceInput;
 import com.claudionogueira.logisticsproject.domain.services.OccurenceService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "*")
+@Api(value = "RESTful API for a logistics project")
 @RestController
 @RequestMapping(value = "/api/v1/deliveries/{deliveryId}/occurences")
 public class OccurenceController {
