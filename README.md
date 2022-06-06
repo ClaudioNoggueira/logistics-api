@@ -1,5 +1,5 @@
 # logistics-api
-RESTful API for a delivery project
+Application Programming Interface (API) using REpresentation State Transfer (REST) architecture designed for logistics of a delivery project.
 
 ## Class Diagram
 
